@@ -144,44 +144,10 @@ button
 <!-- make the queries -->
 <script language="javascript">
 function query1() {
-    MP.api.jql(function main() {
-        return Events({
-                from_date: '2016-06-03',
-                to_date: '2016-06-03'
-            })
-            
-            //find 'active events'
-            .filter(function(event) {
-                return event.name === "Post" || event.name ===
-                    "Like" || event.name ===
-                    "Comment"
-            })
-            
-            //solve for 'unique users'
-            .groupByUser(function(count, events) {
-                count = count || 0;
-                return count + events.length;
-            })
-            
-            //sum the count of uniques across all events 
-            .reduce(mixpanel.reducer.count())
-            
-            // summerize event names
-            //.groupBy(['name'], mixpanel.reducer.count())
-    }).done(function(results) {
-       console.log('DAU query: '+results);
 
-       //update our view with results
-       var dau = results.toString()
-       $('#barOne').css("height", (dau/2000)*100+"%");
-        $('#DAU h2').text(dau)
-  
-       //return results;
-    });
 }
 
 function query2() {
-
 
 MP.api.jql(function main() {
   var funnel = params.funnel || ["App Open", "In-app Purchase"];
@@ -286,9 +252,9 @@ $(document).on("ready", function(){
 
 $('#dataRefresh').on('click', function() { 
 // run querys here:
-  query1();
-  query2();
-  query3();
+  
+  //query2();
+  //query3();
 
   console.log('data updated!')
   
