@@ -145,6 +145,36 @@ button
 <script language="javascript">
 function query1() {
 
+MP.api.jql(function main() {
+  return Events({
+    from_date: '2016-06-05',
+    to_date:   '2016-06-06'
+  })
+  //define active users
+  .filter(function(events){
+    return events.name === "Post" || events.name === "Like" || events.name === "Comments"
+  })
+  //solve for unique users
+  .groupByUser(function(count, events) {
+    count = count || 0;
+    return count + events.length;
+  })
+  
+  //count unique users
+  .reduce(mixpanel.reducer.count());
+ 
+}).done(function(results){
+  console.log('DAU query: ' + results);
+  
+  //update views
+  var dau = results.toString()
+  $('#DAU h2').text(dau);
+  $('#barOne').css("height", (dau/2000)*100+"%");
+  
+})  
+  
+  
+
 }
 
 function query2() {
@@ -252,7 +282,7 @@ $(document).on("ready", function(){
 
 $('#dataRefresh').on('click', function() { 
 // run querys here:
-  
+  query1();
   //query2();
   //query3();
 
