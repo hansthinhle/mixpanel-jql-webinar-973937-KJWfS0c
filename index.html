@@ -275,6 +275,12 @@ MP.api.jql(function main() {
 <script>
 $(document).on("ready", function(){
   console.log("doc loaded");
+  setInterval(function(){
+    query1();
+    query2();
+    query3();
+    console.log('report updated automatically');
+  }, 5000);
 
 
 
