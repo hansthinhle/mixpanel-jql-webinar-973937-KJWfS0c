@@ -136,7 +136,7 @@ button
         <div class="row" id="emptySpace" style="height:30px;">
         </div>
   
-        <!--  <a id="dataRefresh" class="button button-primary">Press me!</a> -->
+          <a id="dataRefresh" class="button button-primary">Press me!</a> 
           
       
     </div>
@@ -145,34 +145,6 @@ button
 <script language="javascript">
 function query1() {
 
-MP.api.jql(function main() {
-  return Events({
-    from_date: '2016-06-05',
-    to_date:   '2016-06-06'
-  })
-  //define active users
-  .filter(function(events){
-    return events.name === "Post" || events.name === "Like" || events.name === "Comments"
-  })
-  //solve for unique users
-  .groupByUser(function(count, events) {
-    count = count || 0;
-    return count + events.length;
-  })
-  
-  //count unique users
-  .reduce(mixpanel.reducer.count());
- 
-}).done(function(results){
-  console.log('DAU query: ' + results);
-  
-  //update views
-  var dau = results.toString()
-  $('#DAU h2').text(dau);
-  $('#barOne').css("height", (dau/2000)*100+"%");
-  
-})  
-  
   
 
 }
@@ -224,7 +196,7 @@ MP.api.jql(function main() {
     return funnel_steps;
   });
 }).done(function(results){
-    console.log("funnel query: " + results)
+   
     
     //update the view
     var reformat = results[0]
@@ -258,7 +230,7 @@ MP.api.jql(function main() {
   //count unique sign ups
   .reduce(mixpanel.reducer.count())
 }).done(function(results){
-  console.log("sign up query: " + results)
+  
 
   //update the view
   var signup = results;
@@ -275,12 +247,7 @@ MP.api.jql(function main() {
 <script>
 $(document).on("ready", function(){
   console.log("doc loaded");
-  setInterval(function(){
-    query1();
-    query2();
-    query3();
-    console.log('report updated automatically');
-  }, 5000);
+
 
 
 
@@ -288,11 +255,11 @@ $(document).on("ready", function(){
 
 $('#dataRefresh').on('click', function() { 
 // run querys here:
-  query1();
-  query2();
-  query3();
+  // query1();
+  // query2();
+  // query3();
 
-  console.log('data updated!')
+  console.log('queries ran!')
   
 });
 
