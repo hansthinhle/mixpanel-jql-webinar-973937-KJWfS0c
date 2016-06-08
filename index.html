@@ -164,6 +164,8 @@ MP.api.jql(function main() {
 }).done(function(results){
   //update our view
   console.log(results)
+  $('#DAU h2').text(results);
+  $('#barOne').css("height", (results/3000)*100+"%");
 })
 
 
