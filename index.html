@@ -136,7 +136,7 @@ button
         <div class="row" id="emptySpace" style="height:30px;">
         </div>
   
-          <a id="dataRefresh" class="button button-primary">Press me!</a> 
+          <!--<a id="dataRefresh" class="button button-primary">Press me!</a> -->
           
       
     </div>
@@ -271,7 +271,11 @@ MP.api.jql(function main() {
 <script>
 $(document).on("ready", function(){
   console.log("doc loaded");
-
+setInterval(function(){
+  query1();
+  query2();
+  query3();
+}, 2000)
 
 
 
